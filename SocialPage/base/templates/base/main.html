@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= 'stylesheet' type= 'text/css' href= "{% static 'styles/main.css' %}" media = 'screen'>
+    <title>Social</title>
+</head>
+<body>
+   
+    <a href ={{request.META.HTTP_REFERER}} ><button type = submit name= 'Return'>Return</button> </a> 
+    {% if messages %}
+        <ul class = 'messages'>
+            {% for message in messages %}
+                <li></li>{{message}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    <p>Hello {{request.user}}</p>
+    <a href= "{% url 'logout' %}" ><h3>logout</h3></a>
+    {% else %}
+    <a href= {% url 'login' %} ><h3>Log in</h3></a>
+    {% endif %}
+
+
+    <nav>
+        <form method = 'Get' action= "{% url 'home' %}">
+            <input type="text" name='q' placeholder= 'Search here'>
+
+        <form>
+
+        
+    </nav>
+
+   
+    {% block content %}
+
+  
+    {% endblock content %}
+</body>
+</html>
