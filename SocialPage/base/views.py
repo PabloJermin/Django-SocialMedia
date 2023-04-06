@@ -72,14 +72,14 @@ def home(request):
     rooms = Room.objects.filter(Q(topic__name__icontains=q) |
                                 Q(name__icontains=q) |
                                 Q(description__icontains= q)) 
-    topics = Topic.objects.all()
-    room_count = rooms.count() 
+    topics = Topic.objects.all() 
     room_messages = Message.objects.all().filter(Q(room__topic__name__icontains= q))
     
-    if room_count == 0:
-        room_count = "No "
+    # if room_count == 0:
+    #     room_count = "No "
     
-    return render(request, 'base/home.html', {'rooms': rooms, 'topics': topics, 'room_count': room_count,
+    return render(request, 'base/home.html', {'rooms': rooms, 'topics': topics, 
+                                            #   'room_count': room_count,
                                               "room_messages": room_messages})
 
 
