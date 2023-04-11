@@ -19,23 +19,20 @@
         <div class="layout__body">
           <form  method = "POST" class="form" action=".">
             {% csrf_token %}
-            {% for field in form %}
+
+            {% comment %} {% for field in form %} {% endcomment %}
               <div class='form_group'>
                 <label for= "room_topic">Enter a Topic</label>
-                <input type= "text" name= "topic" required list="topic-list">
-                
-                <datalist id='topic-list'>
-                  <select id='room-topic'>
-                    {% for topic in topics %}
-                    <option value="{{topic.name}}"> {{topic.name}} </option>
-                    {% endfor %}
-                  </select>
-                </datalist>
+                <input required type= "text" value = "{{room.topic.name}}" name= "topic"  list="topic-list">
+                  <datalist id='topic-list'>
+                    <select id='room-topic'>
+                      {% for topic in topics %}
+                      <option value="{{topic.name}}"> {{topic.name}} </option>
+                      {% endfor %}
+                    </select>
+                  </datalist>
               </div>
-
-
-
-            {% endfor %}
+            {% comment %} {% endfor %} {% endcomment %}
 
             {% comment %} <div class="form__group">
               <label for="room_topic">Topic</label>
@@ -52,12 +49,22 @@
 
 
             <div class="form__group">
-              <label for="room_about">About</label>
-              <textarea name="room_about" id="room_about" placeholder="Write about your study group..."></textarea>
+              <label for="room_name">Room Name</label>
+              {{form.name}}
+              {% comment %} <textarea name="room_about" id="room_about" placeholder="Write about your study group..."></textarea> {% endcomment %}
             </div>
+
+            <div class="form__group">
+              <label for="room_description">Room description</label>
+              {{form.description}}
+              {% comment %} <textarea name="room_about" id="room_about" placeholder="Write about your study group..."></textarea> {% endcomment %}
+            </div>
+
+
+
             <div class="form__action">
               <a class="btn btn--dark" href="index.html">Cancel</a>
-              <button class="btn btn--main" type="submit">Create Room</button>
+              <button class="btn btn--main" type="submit">Submit</button>
             </div>
           </form>
         </div>

@@ -126,7 +126,7 @@
 
                   </div>
                   <div class="thread__details">
-                    {{message.body }}
+                    {{mess.body }}
                   </div>
                 </div>
                 {% endfor %}
@@ -136,7 +136,7 @@
 
           {%if request.user.is_authenticated%}
           <div class="room__message">
-            <form method ="Post" action=".">
+            <form method ="Post" action="">
               {% csrf_token %}
               <input name="body" placeholder="Write your message here..." />
             </form>
