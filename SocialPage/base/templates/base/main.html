@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="{% static 'styles/style.css' %} " />
-    <title>Social Network - Find partners around the world!</title>
+    <title>Team Work - Find Your Team Mates around the world!</title>
   </head>
 
   <body>
@@ -16,7 +16,7 @@
           <div class="container">
             <a href="{% url 'home' %}" class="header__logo">
               <img src="{% static 'images/logo.svg' %} " />
-              <h1>Social Network</h1>
+              <h1>Team Work</h1>
             </a>
             <form class="header__search" method= "GET" action= "{% url 'home' %}">
               <label>
@@ -26,7 +26,7 @@
                     d="M32 30.586l-10.845-10.845c1.771-2.092 2.845-4.791 2.845-7.741 0-6.617-5.383-12-12-12s-12 5.383-12 12c0 6.617 5.383 12 12 12 2.949 0 5.649-1.074 7.741-2.845l10.845 10.845 1.414-1.414zM12 22c-5.514 0-10-4.486-10-10s4.486-10 10-10c5.514 0 10 4.486 10 10s-4.486 10-10 10z"
                   ></path>
                 </svg>
-                <input name= "q" placeholder="Search for rooms..." />
+                <input name= "q" placeholder="Search your favorite team..." />
               </label>
             </form>
             <nav class="header__menu">
@@ -34,7 +34,7 @@
               <!-- Logged In -->
               {% if request.user.is_authenticated %}
               <div class="header__user">
-                <a href="{% url 'update_user' %}">
+                <a href="{% url 'user-profile' request.user.id %}">
                   <div class="avatar avatar--medium active">
                     <img src="https://randomuser.me/api/portraits/men/37.jpg" />
                   </div>
@@ -84,24 +84,24 @@
           </div>
         </header>
 
-        {% if messages %}
+      {% comment %} {% if messages %}
         <ul class = 'messages'>
             {% for message in messages %}
                 <li></li>{{message}}</li>
             {% endfor %}
         </ul>
-        {% endif %}
+        {% endif %} {% endcomment %}
         
-        {% if request.user.is_authenticated %}
+        {% comment %} {% if request.user.is_authenticated %}
     <p>Hello {{request.user}}</p>
     <a href= "{% url 'logout' %}" ><h3>logout</h3></a>
     {% else %}
     <a href= {% url 'login' %} ><h3>Log in</h3></a>
-    {% endif %}
+    {% endif %}  {% endcomment %}
+
+
 
         {% block content %}
-
-  
         {% endblock content %}
 
 
