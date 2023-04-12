@@ -14,7 +14,7 @@
                   ></path>
                 </svg>
               </a>
-              <h3>Study Room</h3>
+              <h3>Dressing Room</h3>
             </div>
 
             {%if room.user == request.user%}
@@ -122,9 +122,9 @@
                       </svg>
                     </div>
                   </a>
-                    {% endif %}
-
-                  </div>
+                  {% endif %}
+                  
+                </div>
                   <div class="thread__details">
                     {{mess.body }}
                   </div>
@@ -147,7 +147,7 @@
 
         <!--   Start -->
         <div class="participants">
-          <h3 class="participants__top">Participants <span>({{participant.count}} Joined)</span></h3>
+          <h3 class="participants__top">Team Players <span>({{participant.count}} Joined)</span></h3>
           <div class="participants__list scroll">
 
             {% for part  in participants %}

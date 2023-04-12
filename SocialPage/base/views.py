@@ -16,6 +16,15 @@ from .forms import RoomForm, UserForm
 # ]
 def loginPage(request):
     page = "login"
+    form = UserCreationForm()
+    
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user =form.save(commit = false)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
     
     if request.user.is_authenticated:
         return redirect('home')
@@ -37,14 +46,15 @@ def loginPage(request):
         else:
             messages.error(request, "Username OR password does not exist")
         
-    context = {"page" : page}
+    context = {"page" : page,
+               "form": form}
     return render (request, "base/loginpage.html", context)
 
 
 
 def logoutUser(request):
     logout(request)
-    return redirect('home')
+    return redirect('login')
 
 
 def registerUser(request):  
@@ -210,7 +220,7 @@ def deleteMessage(request, pk):
 @login_required(login_url="login")
 def update_user(request):
     user = request.user 
-    form = UserForm(instace = user)
+    form = UserForm(instance = user)
     
     if request.method == "POST":
         form = UserForm(request.POST, instance = user)
@@ -220,7 +230,7 @@ def update_user(request):
         
     
     
-    contex = { 
+    context = { 
               "form": form,
     }
     return render(request, 'base/update_user.html', context)
@@ -234,6 +244,6 @@ def topicsPage(request):
 
 
 
-# def activityPage(request):
-#     messages = Messages.objects.all()
-#     return render(request, 'base/activityPage.html', {})
+def activityPage(request):
+    messages = Messages.objects.all()
+    return render(request, 'base/activityPage.html', {})
